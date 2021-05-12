@@ -3,6 +3,7 @@ import 'package:people/MyConfig.dart';
 import 'package:people/Product.dart';
 class ShoppingBasketItem extends StatefulWidget {
   Product _product;
+  int _count = 0;
   @override
   _ShoppingBasketItemState createState() => _ShoppingBasketItemState();
 
@@ -47,7 +48,7 @@ class _ShoppingBasketItemState extends State<ShoppingBasketItem> {
                         child: Icon(Icons.chevron_right, size:35),
                       ),
                       SizedBox(width: 5),
-                      Text(widget._product.,),
+                      Text(widget._count.toString(),),
                       SizedBox(width: 5),
                       GestureDetector(
                         child: Icon(Icons.chevron_left, size:35),
