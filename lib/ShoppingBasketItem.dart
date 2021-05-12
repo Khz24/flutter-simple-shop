@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:people/MyConfig.dart';
 import 'package:people/Product.dart';
+
+typedef OnRemovePressed (int index);
 class ShoppingBasketItem extends StatefulWidget {
   Product _product;
-  int _count = 0;
+  int _count = 1;
+  int _index;
+  num _maxcount = 5;
+  OnRemovePressed _onRemovePressed;
+
   @override
   _ShoppingBasketItemState createState() => _ShoppingBasketItemState();
-
-  ShoppingBasketItem(this._product);
+  ShoppingBasketItem(this._product, this._onRemovePressed, this._index);
 }
 
 class _ShoppingBasketItemState extends State<ShoppingBasketItem> {
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -46,23 +52,58 @@ class _ShoppingBasketItemState extends State<ShoppingBasketItem> {
                     children: [
                       GestureDetector(
                         child: Icon(Icons.chevron_right, size:35),
-                      ),
+                      onTap: (){Add_or_Dec(1);},),
                       SizedBox(width: 5),
                       Text(widget._count.toString(),),
                       SizedBox(width: 5),
                       GestureDetector(
-                        child: Icon(Icons.chevron_left, size:35),
-                      ),
+                        child: GestureDetector(child: Icon(Icons.chevron_left, size:35), onTap: (){Navigator.pop(context);},),
+                        onTap: (){Add_or_Dec(-1);},),
 
                     ],
                   ),
-                )
+                ),
               ],
-            )
+            ),
+            Expanded(
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 20, top:15, bottom: 15),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        GestureDetector(
+                          child: Icon(Icons.delete, size:35),
+                          onTap: (){widget._onRemovePressed(widget._index);},
+                        ),
+                        Text(widget._product.price),
+                      ],
+                    ),
+                  ),
+
+                ))
+
           ],
         ),
       ),
     );
+  }
+  void Add_or_Dec(int count){
+    if((widget._count == 0) && (count<0))
+      return;
+    else
+    if((widget._count >= widget._maxcount) && (count>0))
+      return;
+    else
+      {
+       setState(() {
+         widget._count+=count;
+         print(widget._count);
+       });
+      }
+
   }
 }
  

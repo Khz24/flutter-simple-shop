@@ -18,7 +18,7 @@ class DescriptionPage extends StatelessWidget {
         backgroundColor: Colors.black12,
         elevation: 1,
         centerTitle: true,
-        leading: Icon(Icons.arrow_back_ios),
+        leading: GestureDetector(child: Icon(Icons.arrow_back_ios), onTap: (){Navigator.pop(context);},),
         // actions: <Widget>[ IconButton(icon: Icons.map, color: Colors.black38,)],
       ),
       body: Column(

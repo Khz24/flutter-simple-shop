@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:people/ShoppingBasketItem.dart';
 import 'ShoppingBasketData.dart';
 import 'MyConfig.dart';
+
+
 class ShoppingBasket extends StatefulWidget {
   @override
   _ShoppingBasketState createState() => _ShoppingBasketState();
@@ -35,11 +37,29 @@ class _ShoppingBasketState extends State<ShoppingBasket> {
         itemBuilder: (context, position){
           return GestureDetector(
             child: Padding(
-                child: ShoppingBasketItem(ShoppingBasketData.getInstance().basketItems[position]),
+                child: ShoppingBasketItem(ShoppingBasketData.getInstance().basketItems[position], removeItem , position),
               padding: EdgeInsets.only(left:10, right: 10, top:10),
             ),
           );
         }
     );
   }
+  void removeItem(int index)
+  {
+    // if(onClicked) {
+      setState(() {
+        if (ShoppingBasketData
+            .getInstance()
+            .basketItems
+            .isNotEmpty) {
+          ShoppingBasketData
+              .getInstance()
+              .basketItems
+              .removeAt(index);
+          print('removeAt($index)');
+        }
+      });
+    // }
+  }
+
 }
