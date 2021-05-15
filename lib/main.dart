@@ -6,6 +6,7 @@ import 'MyConfig.dart';
 import 'package:http/http.dart' as http;
 import 'package:people/DescriptionPage.dart';
 import 'dart:convert';
+import 'MyPageTransition.dart';
 import 'ShoppingBasketData.dart';
 
 void main() {
@@ -50,8 +51,9 @@ class _StoreState extends State<Store> {
             IconButton(icon: Icon(Icons.shopping_basket, color: Colors.green,),
                 onPressed: (){
                     Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context)=>ShoppingBasket())
-                    );
+                      // MaterialPageRoute(builder: (context)=>ShoppingBasket())
+                        SlideRightRoute(widget:ShoppingBasket())
+                        );
 
                 })
           ],
